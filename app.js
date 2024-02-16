@@ -28,6 +28,8 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
+app.use(cors());
+// corsOptions
 
 const transporter = nodemailer.createTransport({
   host: "smtp.office365.com",
@@ -208,8 +210,6 @@ MegaSails Team
   }
 });
 
-app.use(cors());
-// corsOptions
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -362,5 +362,5 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/var/www/html", "index.html"));
 });
 
-const port = 5001;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
